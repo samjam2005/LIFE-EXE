@@ -1,4 +1,3 @@
-```markdown
 # MedBrief
 
 **Know before you go.**
@@ -53,7 +52,7 @@ It also guides users on what to say, what to ask, and highlights important conce
 
 ## 📁 Project Structure
 
-```
+
 
 medbrief/
 ├── backend/
@@ -66,7 +65,7 @@ medbrief/
 ├── pitch/
 └── README.md
 
-````
+```
 
 ---
 
