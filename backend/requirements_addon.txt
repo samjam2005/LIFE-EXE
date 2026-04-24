@@ -1,8 +1,0 @@
-# RxReady Companion — additive dependencies only
-# Do NOT overwrite or merge into teammate's requirements.txt
-# Install with: pip install -r requirements_addon.txt
-anthropic>=0.25.0
-fastapi>=0.110.0
-uvicorn[standard]>=0.29.0
-python-dotenv>=1.0.0
-pydantic>=2.0.0

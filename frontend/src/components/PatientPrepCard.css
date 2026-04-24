@@ -1,18 +1,16 @@
 /* ============================================================
-   PatientPrepCard.css
-   All rules scoped to .prep-card to prevent App.css collisions
+   PatientPrepCard.css — cream aesthetic (matches App.css)
+   All rules scoped to .prep-card
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
-
 .prep-card {
-  font-family: 'DM Sans', sans-serif;
-  background-color: #112233;
-  color: #e8f4f8;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: #ffffff;
+  color: #18160f;
+  border: 1px solid rgba(24,22,15,0.09);
   border-radius: 12px;
-  padding: 24px 28px;
-  max-width: 680px;
-  margin: 20px auto 0;
+  padding: 1.4rem 1.6rem;
+  animation: section-in 0.28s ease;
 }
 
 /* ---- Card header row ---- */
@@ -20,53 +18,54 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 }
 
 .prep-card__title {
-  font-size: 13px;
-  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.63rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #7a9bb5;
+  color: #b8b3a8;
 }
 
 /* ---- Urgency badge (top-right) ---- */
 .prep-card__urgency-badge {
-  font-size: 11px;
-  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   border-radius: 20px;
-  padding: 4px 12px;
+  padding: 0.15rem 0.6rem;
 }
 
 .prep-card__urgency-badge--routine {
-  background: rgba(16,185,129,0.15);
-  color: #10b981;
-  border: 1px solid #10b981;
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
 }
 
 .prep-card__urgency-badge--urgent {
-  background: rgba(245,158,11,0.15);
-  color: #f59e0b;
-  border: 1px solid #f59e0b;
+  background: #fff7ed;
+  color: #ea580c;
+  border: 1px solid #fed7aa;
 }
 
 .prep-card__urgency-badge--emergency {
-  background: rgba(239,68,68,0.15);
-  color: #ef4444;
-  border: 1px solid #ef4444;
+  background: #fff1f1;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
   animation: prep-card-pulse 1.4s ease-in-out infinite;
 }
 
 @keyframes prep-card-pulse {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(239,68,68,0.6);
+    box-shadow: 0 0 0 0 rgba(220,38,38,0.5);
     opacity: 1;
   }
   50% {
-    box-shadow: 0 0 0 6px rgba(239,68,68,0);
+    box-shadow: 0 0 0 6px rgba(220,38,38,0);
     opacity: 0.85;
   }
 }
@@ -75,23 +74,24 @@
 .prep-card__sections {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-bottom: 20px;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
 }
 
 .prep-card__section {
-  background: #0d1f2d;
-  border-radius: 10px;
-  padding: 14px 18px;
+  background: #f5f2ee;
+  border: 1px solid rgba(24,22,15,0.09);
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
 }
 
 .prep-card__section-label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.63rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #00b4a6;
-  margin-bottom: 10px;
+  color: #7a7568;
+  margin-bottom: 0.6rem;
 }
 
 .prep-card__items {
@@ -100,16 +100,16 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 0.4rem;
 }
 
 .prep-card__items li {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  font-size: 14px;
-  color: #e8f4f8;
-  line-height: 1.5;
+  gap: 0.6rem;
+  font-size: 0.88rem;
+  color: #18160f;
+  line-height: 1.65;
 }
 
 .prep-card__items li::before {
@@ -118,35 +118,36 @@
   width: 6px;
   height: 6px;
   min-width: 6px;
-  background: #00b4a6;
+  background: #18160f;
   border-radius: 50%;
-  margin-top: 6px;
+  margin-top: 0.55rem;
 }
 
 /* ---- Copy button ---- */
 .prep-card__copy-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 9px 20px;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
   background: transparent;
-  color: #00b4a6;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  border: 1.5px solid #00b4a6;
+  color: #7a7568;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  border: 1px solid rgba(24,22,15,0.14);
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: all 0.15s;
 }
 
 .prep-card__copy-btn:hover {
-  background: #00b4a6;
-  color: #0d1f2d;
+  background: #18160f;
+  color: #f5f2ee;
+  border-color: #18160f;
 }
 
 .prep-card__copy-btn--copied {
-  background: rgba(16,185,129,0.15);
-  border-color: #10b981;
-  color: #10b981;
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+  color: #166534;
 }

@@ -10,7 +10,7 @@ import json
 import os
 from typing import List, Optional
 
-import anthropic
+from groq import Groq
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
@@ -21,23 +21,31 @@ router = APIRouter()
 # ---------------------------------------------------------------------------
 
 class Symptom(BaseModel):
-    name: str
-    duration: str
-    severity: int
+    symptom: str
+    duration: Optional[str] = None
+    severity: Optional[str] = None
+    pattern: Optional[str] = None
+    details: Optional[str] = None
+
+class MedicationsAndAllergies(BaseModel):
+    current_medications: List[str] = []
+    allergies: List[str] = []
+    tried_for_this: List[str] = []
 
 class RedFlag(BaseModel):
-    symptom: str
-    urgency: str  # "routine" | "urgent" | "emergency"
+    flag: str
+    reason: Optional[str] = None
+    urgency: str  # "routine" | "soon" | "urgent" | "emergency"
 
 class ReportPayload(BaseModel):
+    patient_summary: Optional[str] = None
     chief_complaint: str
-    symptoms: List[Symptom]
-    medications: List[str]
-    allergies: List[str]
-    red_flags: List[RedFlag]
-    questions_for_doctor: List[str]
-    summary_plain_english: str
-    visit_type_recommendation: str  # "routine" | "urgent" | "emergency"
+    symptoms: List[Symptom] = []
+    medications_and_allergies: Optional[MedicationsAndAllergies] = None
+    relevant_history: Optional[str] = None
+    red_flags: List[RedFlag] = []
+    questions_for_doctor: List[str] = []
+    doctor_note: Optional[str] = None
 
 class AnalyzeRequest(BaseModel):
     report: ReportPayload
@@ -88,14 +96,14 @@ Generate one flag per notable symptom or red flag. If there are no notable items
 @router.post("/analyze", response_model=AnalyzeResponse)
 async def analyze_report(body: AnalyzeRequest):
     """
-    Second-pass Claude call that surfaces questions for the patient to raise
+    Second-pass LLM call that surfaces questions for the patient to raise
     with their doctor — never produces diagnostic language.
     """
-    api_key = os.getenv("ANTHROPIC_API_KEY")
+    api_key = os.getenv("GROQ_API_KEY")
     if not api_key:
-        raise HTTPException(status_code=500, detail="ANTHROPIC_API_KEY not configured")
+        raise HTTPException(status_code=500, detail="GROQ_API_KEY not configured")
 
-    client = anthropic.Anthropic(api_key=api_key)
+    client = Groq(api_key=api_key)
 
     report = body.report
     report_text = json.dumps(report.model_dump(), indent=2)
@@ -107,28 +115,30 @@ async def analyze_report(body: AnalyzeRequest):
 Return a JSON object with a "flags" array. Each flag must include a symptom name, a question framed for the patient to ask their doctor, and a priority level (low/medium/high). Return only the JSON object — no other text."""
 
     try:
-        message = client.messages.create(
-            model="claude-sonnet-4-6",
+        response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
             max_tokens=1024,
-            system=SYSTEM_PROMPT,
-            messages=[{"role": "user", "content": user_message}],
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": user_message},
+            ],
         )
-    except anthropic.APIError as e:
-        raise HTTPException(status_code=502, detail=f"Claude API error: {str(e)}")
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"Groq API error: {str(e)}")
 
-    raw = message.content[0].text.strip()
+    raw = (response.choices[0].message.content or "").strip()
 
-    # Strip accidental markdown fences if Claude wraps anyway
+    # Strip accidental markdown fences
     if raw.startswith("```"):
         raw = raw.split("\n", 1)[-1]
         raw = raw.rsplit("```", 1)[0].strip()
 
     try:
         parsed = json.loads(raw)
-    except json.JSONDecodeError as e:
+    except json.JSONDecodeError:
         raise HTTPException(
             status_code=502,
-            detail=f"Claude returned non-JSON response: {raw[:200]}",
+            detail=f"LLM returned non-JSON response: {raw[:200]}",
         )
 
     flags = [AnalysisFlag(**f) for f in parsed.get("flags", [])]

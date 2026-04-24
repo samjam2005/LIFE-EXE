@@ -55,7 +55,7 @@ function buildAskThis(questionsForDoctor, analysisFlags) {
 
 function buildPlainText(sayItems, askItems, dontForget) {
   const lines = [
-    '--- RxReady Prep Card ---',
+    '--- MedBrief Prep Card ---',
     '',
     'SAY THIS:',
     ...sayItems.map(i => `  - ${i}`),
