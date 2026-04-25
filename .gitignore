@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+pitch/node_modules/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Environment
+.env
+backend/.env
+
+# Build output
+frontend/dist/
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Test artifacts
+.playwright-mcp/
+
+# Pitch deck (excluded from repo)
+pitch/

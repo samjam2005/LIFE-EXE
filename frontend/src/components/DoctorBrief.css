@@ -1,0 +1,289 @@
+/* ============================================================
+   DoctorBrief.css — cream aesthetic (matches App.css)
+   All rules scoped to .doctor-brief
+   ============================================================ */
+
+.doctor-brief {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: #ffffff;
+  color: #18160f;
+  border: 1px solid rgba(24,22,15,0.09);
+  border-radius: 12px;
+  padding: 1.4rem 1.6rem;
+  animation: section-in 0.28s ease;
+}
+
+@keyframes doctor-brief-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Chief Complaint ---- */
+.doctor-brief__chief {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(24,22,15,0.09);
+}
+
+.doctor-brief__chief-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.63rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #b8b3a8;
+  margin-bottom: 0.5rem;
+}
+
+.doctor-brief__chief-text {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #18160f;
+  line-height: 1.3;
+  letter-spacing: -0.3px;
+}
+
+/* ---- Section headings ---- */
+.doctor-brief__section {
+  margin-bottom: 1.25rem;
+}
+
+.doctor-brief__section-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.63rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #b8b3a8;
+  margin-bottom: 0.75rem;
+}
+
+/* ---- Symptom table ---- */
+.doctor-brief__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.83rem;
+}
+
+.doctor-brief__table th {
+  text-align: left;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  color: #b8b3a8;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid rgba(24,22,15,0.09);
+  letter-spacing: 0.07em;
+}
+
+.doctor-brief__table td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid rgba(24,22,15,0.09);
+  color: #3a3729;
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.doctor-brief__table tr:last-child td {
+  border-bottom: none;
+}
+
+.doctor-brief__table tr:hover td {
+  background: #f5f2ee;
+}
+
+.doctor-brief__severity {
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.doctor-brief__severity--high   { color: #991b1b; }
+.doctor-brief__severity--medium { color: #92400e; }
+.doctor-brief__severity--low    { color: #166534; }
+
+/* ---- Med / Allergy two-column ---- */
+.doctor-brief__med-allergy-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.doctor-brief__pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.doctor-brief__pill {
+  background: #f5f2ee;
+  border: 1px solid rgba(24,22,15,0.14);
+  border-radius: 20px;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.82rem;
+  color: #3a3729;
+}
+
+.doctor-brief__pill--allergy {
+  border-color: #92400e;
+  color: #92400e;
+}
+
+.doctor-brief__empty {
+  color: #b8b3a8;
+  font-size: 0.82rem;
+  font-style: italic;
+}
+
+/* ---- Red flags ---- */
+.doctor-brief__flag-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.doctor-brief__flag {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #f5f2ee;
+  border: 1px solid rgba(24,22,15,0.09);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+.doctor-brief__flag-symptom {
+  flex: 1;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #18160f;
+}
+
+.doctor-brief__badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 20px;
+  padding: 0.15rem 0.6rem;
+  white-space: nowrap;
+}
+
+.doctor-brief__badge--emergency {
+  background: #fff1f1;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+}
+
+.doctor-brief__badge--urgent {
+  background: #fff7ed;
+  color: #ea580c;
+  border: 1px solid #fed7aa;
+}
+
+.doctor-brief__badge--routine {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+/* ---- Questions list ---- */
+.doctor-brief__questions {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.doctor-brief__questions li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(24,22,15,0.09);
+  font-size: 0.875rem;
+  color: #3a3729;
+  line-height: 1.65;
+}
+
+.doctor-brief__questions li:last-child {
+  border-bottom: none;
+}
+
+.doctor-brief__questions li::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  min-width: 6px;
+  background: #18160f;
+  border-radius: 50%;
+  margin-top: 0.5rem;
+}
+
+/* ---- Print button ---- */
+.doctor-brief__print-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1.25rem;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: #7a7568;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  border: 1px solid rgba(24,22,15,0.14);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.doctor-brief__print-btn:hover {
+  background: #18160f;
+  color: #f5f2ee;
+  border-color: #18160f;
+}
+
+/* ============================================================
+   PRINT STYLES — clean black-on-white, 8.5" x 11"
+   ============================================================ */
+@media print {
+  @page {
+    size: letter portrait;
+    margin: 0.75in;
+  }
+
+  .doctor-brief__print-btn {
+    display: none !important;
+  }
+
+  .doctor-brief {
+    background: #fff !important;
+    color: #000 !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+
+  .doctor-brief__chief {
+    border-bottom: 2px solid #000 !important;
+  }
+
+  .doctor-brief__chief-text {
+    color: #000 !important;
+  }
+
+  .doctor-brief__table td {
+    color: #000 !important;
+  }
+
+  .doctor-brief__flag {
+    background: #f9f9f9 !important;
+    border: 1px solid #ddd !important;
+  }
+
+  .doctor-brief__questions li {
+    color: #000 !important;
+  }
+}
